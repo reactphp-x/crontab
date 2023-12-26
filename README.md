@@ -34,27 +34,17 @@ use Reactphp\Framework\Crontab\Crontab;
 
 ProcessManager::instance()->initProcessNumber(1);
 
-$stream1 = ProcessManager::instance()->callback(function ($stream) {
+$stream = ProcessManager::instance()->callback(function ($stream) {
     new Crontab('*/1 * * * * *', function() use ($stream) {
-        $stream->write(date('Y-m-d H:i:s')."-child-process-1\n");
+        $stream->write(date('Y-m-d H:i:s')."-child-process\n");
     });
     return $stream;
 });
 
-$stream1->on('data', function ($buffer) {
+$stream->on('data', function ($buffer) {
     echo $buffer;
 });
 
-$stream2 = ProcessManager::instance()->callback(function ($stream) {
-    new Crontab('*/1 * * * * *', function() use ($stream) {
-        $stream->write(date('Y-m-d H:i:s')."-child-process-2\n");
-    });
-    return $stream;
-});
-
-$stream2->on('data', function ($buffer) {
-    echo $buffer;
-});
 ```
 
 ## License
