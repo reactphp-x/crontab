@@ -1,14 +1,14 @@
 {
-    "name": "reactphp-framework/crontab",
+    "name": "reactphp-x/crontab",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Reactphp\\Framework\\Crontab\\": "src/"
+            "ReactphpX\\Crontab\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Reactphp\\Framework\\Crontab\\Tests\\": "tests/"
+            "ReactphpX\\Crontab\\Tests\\": "tests/"
         }
     },
     "authors": [

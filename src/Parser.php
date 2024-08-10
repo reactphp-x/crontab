@@ -31,11 +31,11 @@
  * @license  https://github.com/hyperf/hyperf/blob/master/LICENSE
  */
 
-namespace Reactphp\Framework\Crontab;
+namespace ReactphpX\Crontab;
 
 /**
  * Class Parser
- * @package Reactphp\Framework\Crontab
+ * @package ReactphpX\Crontab
  */
 class Parser
 {

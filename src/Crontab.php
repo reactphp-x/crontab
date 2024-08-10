@@ -11,13 +11,13 @@
  * @link      http://www.workerman.net/
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
-namespace Reactphp\Framework\Crontab;
+namespace ReactphpX\Crontab;
 
 use React\EventLoop\Loop;
 
 /**
  * Class Crontab
- * @package Reactphp\Framework\Crontab
+ * @package ReactphpX\Crontab
  */
 class Crontab
 {

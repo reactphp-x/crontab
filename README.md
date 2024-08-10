@@ -1,9 +1,9 @@
-# reactphp-framework-crontab
+# reactphp-x-crontab
 
 ## install
 
 ```
-composer require reactphp-framework/crontab -vvv
+composer require reactphp-x/crontab -vvv
 ```
 
 ## Usage
@@ -14,7 +14,7 @@ composer require reactphp-framework/crontab -vvv
 <?php
 require __DIR__ . '/vendor/autoload.php';
 
-use Reactphp\Framework\Crontab\Crontab;
+use ReactphpX\Crontab\Crontab;
 
 new Crontab('*/2 * * * * *', function() {
     echo date('Y-m-d H:i:s')."\n";
