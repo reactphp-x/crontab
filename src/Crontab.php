@@ -167,10 +167,10 @@ class Crontab
                         if ($t <= 0) {
                             $t = 0.000001;
                         }
-                        async(function () use ($cb, $t) {
+                        async(function ($t, $cb) {
                             delay($t);
                             $cb();
-                        })();
+                        })($t, $cb);
                     }
                 }
             }
