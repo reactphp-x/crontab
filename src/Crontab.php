@@ -14,6 +14,9 @@
 namespace ReactphpX\Crontab;
 
 use React\EventLoop\Loop;
+use function React\Async\async;
+use function React\Async\delay;
+
 
 /**
  * Class Crontab
@@ -146,26 +149,32 @@ class Crontab
         }
         $inited = true;
         $parser = new Parser();
-        $callback = function () use ($parser, &$callback) {
-            foreach (static::$_instances as $crontab) {
-                $rule = $crontab->getRule();
-                $cb = $crontab->getCallback();
-                if (!$cb || !$rule) {
-                    continue;
-                }
-                $times = $parser->parse($rule);
-                $now = time();
-                foreach ($times as $time) {
-                    $t = $time-$now;
-                    if ($t <= 0) {
-                        $t = 0.000001;
+
+        async(function () use ($parser) {
+            while (true) {
+                delay(60 - time() % 60);
+
+                foreach (static::$_instances as $crontab) {
+                    $rule = $crontab->getRule();
+                    $cb = $crontab->getCallback();
+                    if (!$cb || !$rule) {
+                        continue;
                     }
-                    Loop::addTimer($t, $cb);
+                    $times = $parser->parse($rule);
+                    $now = time();
+                    foreach ($times as $time) {
+                        $t = $time-$now;
+                        if ($t <= 0) {
+                            $t = 0.000001;
+                        }
+                        async(function () use ($cb, $t) {
+                            delay($t);
+                            $cb();
+                        })();
+                    }
                 }
             }
-            Loop::addTimer(60 - time()%60, $callback);
-        };
-        Loop::futureTick($callback);
+        })();
     }
 
 }
